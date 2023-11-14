@@ -48,7 +48,7 @@ class _RidePageState extends State<RidePage> {
                     .snapshots(),
                 builder: (context, snapshot) {
                   return !snapshot.hasData
-                      ? Center(child: CircularProgressIndicator())
+                      ? const Center(child: CircularProgressIndicator())
                       : ListView.builder(
                           itemCount: snapshot.data?.docs.length,
                           itemBuilder: (context, index) {

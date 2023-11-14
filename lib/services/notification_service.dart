@@ -65,9 +65,11 @@ class FirebaseApi {
           client.close();
         });
       } catch (e) {
+        // ignore: avoid_print
         print("ilk hata $e");
       }
     } catch (err) {
+      // ignore: avoid_print
       print("ilk hata $err");
     }
     return true;
