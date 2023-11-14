@@ -14,7 +14,6 @@ class RegisterWithEmailPage extends StatefulWidget {
 }
 
 class _RegisterWithEmailPageState extends State<RegisterWithEmailPage> {
-  final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -36,7 +35,6 @@ class _RegisterWithEmailPageState extends State<RegisterWithEmailPage> {
 
   @override
   void dispose() {
-    _nameController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
@@ -74,13 +72,6 @@ class _RegisterWithEmailPageState extends State<RegisterWithEmailPage> {
             ),
             CustomPaddings.verticalPadding(30),
             CustomTextField(
-              controller: _nameController,
-              finalLabel: TextsTR.rgstrPgNameSur,
-              finalType: TextInputType.name,
-              obsecureStatu: false,
-            ),
-            CustomPaddings.verticalPadding(10),
-            CustomTextField(
               controller: _emailController,
               finalLabel: TextsTR.lgnPgEmail,
               finalType: TextInputType.emailAddress,
@@ -105,21 +96,17 @@ class _RegisterWithEmailPageState extends State<RegisterWithEmailPage> {
               ),
               obsecureStatu: !passwordStatu,
             ),
-            CustomPaddings.verticalPadding(10),
-            CustomPaddings.verticalPadding(10),
             CustomPaddings.verticalPadding(30),
             ElevatedButton(
               onPressed: () {
-                if (_nameController.text.isEmpty) {
+                if (_emailController.text.isEmpty) {
                   customSnackBar(TextsTR.rgstrPgErrNameSur);
-                } else if (_emailController.text.isEmpty) {
-                  customSnackBar(TextsTR.lgnPgErrEmail);
                 } else if (_passwordController.text.isEmpty ||
                     _passwordController.text.isEmpty) {
                   customSnackBar(TextsTR.lgnPgErrPassword);
                 } else {
                   _services.createUserWithEmail(
-                    _nameController.text,
+                    "name",
                     _emailController.text,
                     _passwordController.text,
                     context,

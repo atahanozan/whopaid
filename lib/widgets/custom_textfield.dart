@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whopayed/helper/custom_colors.dart';
 import 'package:whopayed/helper/text_styles.dart';
 
 class CustomTextField extends StatelessWidget {
@@ -9,6 +10,7 @@ class CustomTextField extends StatelessWidget {
     required this.finalType,
     this.suffixIcon,
     this.finalColor,
+    this.errText,
     this.customCapital = TextCapitalization.none,
     required this.obsecureStatu,
   }) : super(key: key);
@@ -20,6 +22,7 @@ class CustomTextField extends StatelessWidget {
   final bool obsecureStatu;
   final Color? finalColor;
   final TextCapitalization customCapital;
+  final String? errText;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +40,8 @@ class CustomTextField extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
         ),
         hintStyle: CustomTextStyle.bodySmall(context),
-        errorStyle: CustomTextStyle.bodySmall(context),
+        errorStyle: CustomTextStyle.bodySmall(context)
+            .copyWith(color: CustomColors.darkRed),
         labelStyle: CustomTextStyle.bodySmall(context),
         helperStyle: CustomTextStyle.bodySmall(context),
         prefixStyle: CustomTextStyle.bodySmall(context),
@@ -46,6 +50,7 @@ class CustomTextField extends StatelessWidget {
         floatingLabelStyle: CustomTextStyle.bodySmall(context),
         label: Text(finalLabel),
         filled: true,
+        errorText: errText,
         suffixIcon: suffixIcon,
       ),
     );

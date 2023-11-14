@@ -5,7 +5,7 @@ import 'package:whopayed/helper/custom_colors.dart';
 import 'package:whopayed/helper/text_styles.dart';
 import 'package:whopayed/helper/texts.dart';
 import 'package:whopayed/helper/utils.dart';
-import 'package:whopayed/pages/loginpages/choose_avatar.dart';
+import 'package:whopayed/pages/loginpages/userinfo.dart';
 import 'package:whopayed/pages/navigation_page.dart';
 
 class UserServices {
@@ -39,11 +39,11 @@ class UserServices {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => ChooseAvatarPage(
+            builder: (context) => UserInfoPage(
               uid: cUser.uid,
               email: cUser.email.toString(),
               name: name,
-              statu: 'new',
+              username: email.split("@").elementAt(0),
             ),
           ),
         );
@@ -70,6 +70,14 @@ class UserServices {
         }
       }
     }
+  }
+
+  Future<bool> checkUser(String userName) async {
+    var user = await FirebaseFirestore.instance
+        .collection("Users")
+        .where("username", isEqualTo: userName)
+        .get();
+    return user.docs.isEmpty ? true : false;
   }
 
   Future<void> loginWithEmail(
